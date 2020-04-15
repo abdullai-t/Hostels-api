@@ -149,14 +149,13 @@ def passwordResetConfirmView(request, uidb64, token):
 def passwordChangeView(request):
     user = request.user
     data = request.data
-    print(user, data)
     serializer = passwordChangeSerializer(data=request.data)
     data = {}
     if serializer.is_valid():
         associated_user = User.objects.get(username=user)
+        print("associated_user: ",associated_user)
         # password from the change form
         new_password = serializer.new_password_validation()
-        print(new_password)
         # overwriting the password filed of the user with the new password
         associated_user.set_password(new_password)
         associated_user.save()
@@ -169,34 +168,40 @@ def passwordChangeView(request):
     return Response(data)
 
 
-# # user profile view
-# @api_view(['POST','GET']) 
-# @authentication_classes([TokenAuthentication,])
-# @permission_classes([IsAuthenticated])
-# def user_profile_view(request):
-#     if request.method =='GET':
-#         user = request.user
-#         user_info = user_profile.objects.get(user=user)
-#         data={}
-#         print(user_info)
-#         if user:        
-#             serializer = user_profile_serializer(data=user_info)
-#             if serializer.is_valid():   
-#                return Response(serializer.data)
-#             else:
-#                data["error"] = "the data is invalid"
-#                return Response(data)
-#     else:
-#         user=request.user
-#         serializer = user_profile_serializer(data=request.data, user=user)
-#         data = {}
-#         if serializer.is_valid():
-#             serializer.save()
-#             data["success"] = "your info has been successfully updated"
-#         else:
-#             data["failure"] = "we could not update your info due to some errors"
+# user profile view
+@api_view(['POST','GET']) 
+@authentication_classes([TokenAuthentication,])
+@permission_classes([IsAuthenticated])
+def user_profile_view(request):
+    if request.method =='GET':
+        user = user_profile.objects.get(user=request.user)
+        user_info = {
+            'name':user.name,
+            'email':user.email,
+            'avatar':user.avatar,
+            'contact':user.contact,
+        }
+        
+        data={}
+        if user:        
+            serializer = user_profile_serializer(data=user_info)
+            if serializer.is_valid():   
+               return Response(serializer.data)
+            else:
+               data["error"] = "the data is invalid"
+               return Response(data)
+    else:
+        user = user_profile.objects.get(user=request.user)
+        serializer = user_profile_serializer(data=request.data, instance=user)
+        data = {}
+        if serializer.is_valid():
+            serializer.save()
+
+            data["success"] = "your info has been successfully updated"
+        else:
+            data["failure"] = "we could not update your info due to some errors"
             
-#         return Response(data)
+        return Response(data)
         
             
         

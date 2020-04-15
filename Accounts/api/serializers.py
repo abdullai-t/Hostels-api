@@ -41,7 +41,7 @@ class user_creation_serializer(serializers.ModelSerializer):
             raise serializers.validationError({'password':'passwords must match.'})
         account.set_password(password)
         account.save()
-        profile = user_profile.create(
+        profile = user_profile(
             name= self.validated_data['username'],
             email= self.validated_data['email'],
             contact= self.validated_data['contact'],
