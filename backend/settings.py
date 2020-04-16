@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',    
     # user defined Apps
     'Accounts', 
+    'hostels',
 
 ]
  

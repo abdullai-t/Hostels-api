@@ -24,6 +24,8 @@ urlpatterns = [
      url(r'^admin/', admin.site.urls),
       #   rest framework urls
     url(r'^api-auth/', include('Accounts.api.urls')),
+    url(r'^api-hostels/', include('hostels.api.urls')),
+
    
 ]
 urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
