@@ -1,9 +1,13 @@
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from hostels.models import Location, Hostel, Room
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
+from hostels.models import Location, Hostel, Room, BookRoom
 
-from hostels.api.serializers import locationSerializer,hostelSerializer, roomSerializer
+
+from hostels.api.serializers import locationSerializer,hostelSerializer, roomSerializer,bookRoomSerializer
 
 # ######################### create Location requests ########################################################
 # view for creating locations
@@ -58,6 +62,25 @@ def room_creation_view(request):
             return Response(data)
         
 # ############################### book room request ###################################################
+@api_view(['POST',])
+@authentication_classes([TokenAuthentication,])
+@permission_classes([IsAuthenticated])
+def book_room_view(request):
+    if request.method == "POST":
+        user = User.objects.get(username=request.user)
+        hostel = Hostel.objects.get(name=request.data.get("hostel"))
+        room_type = request.data.get("room")
+        room = Room.objects.get(room_type=room_type, hostel__pk=hostel.pk)
+        data={}
+        serializer = bookRoomSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=user, room=room)
+            return Response(serializer.data)
+        else:
+            data["failure"] = "the data is invalid"
+            return Response(data)
+        
+        
 
         
 # ++++++++++++++++++++++++++++++++++++end of creations +++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -110,4 +133,12 @@ def get_rooms_in_hostel(request,hostel):
 
 
 # get all booked rooms by a user
-  
+@api_view(['GET',])
+@authentication_classes([TokenAuthentication,])
+@permission_classes([IsAuthenticated])
+def get_user_booked_rooms(request):
+    user = User.objects.get(username=request.user)
+    booked_rooms = BookRoom.objects.filter(user__username=user)
+    serializer = bookRoomSerializer(booked_rooms, many=True)
+    return Response(serializer.data)
+        

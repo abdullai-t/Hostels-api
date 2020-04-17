@@ -153,7 +153,6 @@ def passwordChangeView(request):
     data = {}
     if serializer.is_valid():
         associated_user = User.objects.get(username=user)
-        print("associated_user: ",associated_user)
         # password from the change form
         new_password = serializer.new_password_validation()
         # overwriting the password filed of the user with the new password

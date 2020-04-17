@@ -15,3 +15,10 @@ class roomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         fields = ['room_type', 'price']
+        
+        
+class bookRoomSerializer(serializers.ModelSerializer):
+    room = serializers.CharField(source='room.room_type', read_only=True)
+    class Meta:
+        model = BookRoom
+        fields = ['room']
