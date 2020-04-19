@@ -5,7 +5,8 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from hostels.models import Location, Hostel, Room, BookRoom
-
+from rest_framework.generics import ListAPIView
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 from hostels.api.serializers import locationSerializer,hostelSerializer, roomSerializer,bookRoomSerializer
 
@@ -99,12 +100,13 @@ def get_all_locations(request):
     
 
 # get all hostels
-@api_view(['GET',])
-def get_all_hostels(request):
-    if request.method == "GET":
-        hostels = Hostel.objects.all()
-        serializer = hostelSerializer(hostels, many=True)
-        return Response(serializer.data)
+class hostels_api_listView(ListAPIView):
+    queryset = Hostel.objects.all()
+    serializer_class = hostelSerializer
+    # authentication_classes = (TokenAuthentication,)
+    # permission_classes = (IsAuthenticated,)
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ('name', 'location__name')
 
 
 # get all hostels in a specific location
@@ -141,4 +143,14 @@ def get_user_booked_rooms(request):
     booked_rooms = BookRoom.objects.filter(user__username=user)
     serializer = bookRoomSerializer(booked_rooms, many=True)
     return Response(serializer.data)
+
+# view for budget page
+class budget_api_listView(ListAPIView):
+    queryset = Room.objects.all()
+    serializer_class = roomSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ('price', 'room_type')
+
         
