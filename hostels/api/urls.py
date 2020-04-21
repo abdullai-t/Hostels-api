@@ -17,7 +17,7 @@ urlpatterns = [
      url(r'^book-room/$', book_room_view, name="book_room" ),
     
     # query urls
-    url(r'^locations/$', get_all_locations, name="all_locations" ),
+    url(r'^locations/$', get_all_locations.as_view(), name="all_locations" ),
     url(r'^hostels/$', hostels_api_listView.as_view(), name="all_hostels" ),
     url(r'^my-rooms/$', get_user_booked_rooms, name="my_rooms" ),
     url(r'^(?P<location>[\w-]+)/hostels/$', get_hostels_in_location, name="all_hostels_in_location" ),

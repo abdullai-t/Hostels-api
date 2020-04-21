@@ -1,0 +1,74 @@
+form{
+  padding: 5% 15% 5% 15%;
+}
+.register-title{
+  text-align: center;
+  font-size: 2rem;
+  margin:0 0 2% 0;
+}
+
+.register-main{
+  padding:5% 20% 5% 20%;
+}
+.forgot{
+  margin-top: 2rem;
+}
+
+/* landing page */
+.top-item{
+  background-image: url('./components/img/b.jpg');
+  height: 55vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.discip{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.discip h1{
+  font-size: 3rem;
+  color: blanchedalmond;
+}
+.discip p{
+  font-size: 2rem;
+  color: blanchedalmond;
+}
+.landing-login{
+  position: absolute;
+  top:2% !important;
+  right: 2% !important;
+}
+.photo-g{
+  margin-top: 4%;
+}
+.header{
+  text-align: center;
+  font-size: 2rem !important;
+  margin-bottom: 4% !important;
+  font-family: montserat;
+}
+
+footer {
+  margin-top: 20px;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding-top: 2rem !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 1.4rem !important;
+}
+
+.folow-us i{
+ color: #f1948a ;
+ font-size: 2rem;
+}
+.folow-us{
+margin-bottom: 2%;
+ }

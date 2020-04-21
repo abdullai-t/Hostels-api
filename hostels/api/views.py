@@ -90,12 +90,22 @@ def book_room_view(request):
 # ######################### Get requests ########################################################
 
 # get all locations
-@api_view(['GET',])
-def get_all_locations(request):
-    if request.method == "GET":
-        locations = Location.objects.all()
-        serializer = locationSerializer(locations, many=True)
-        return Response(serializer.data)
+# @api_view(['GET',])
+# @authentication_classes([TokenAuthentication,])
+# @permission_classes([IsAuthenticated])
+# def get_all_locations(request):
+#     if request.method == "GET":
+#         locations = Location.objects.all()
+#         serializer = locationSerializer(locations, many=True)
+#         return Response(serializer.data)
+    
+class get_all_locations(ListAPIView):
+    queryset = Location.objects.all()
+    serializer_class = locationSerializer
+    # authentication_classes = (TokenAuthentication,)
+    # permission_classes = (IsAuthenticated,)
+    # filter_backends = (SearchFilter, OrderingFilter)
+    # search_fields = ('name', 'location__name')
         
     
 
@@ -148,8 +158,8 @@ def get_user_booked_rooms(request):
 class budget_api_listView(ListAPIView):
     queryset = Room.objects.all()
     serializer_class = roomSerializer
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+    # authentication_classes = (TokenAuthentication,)
+    # permission_classes = (IsAuthenticated,)
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('price', 'room_type')
 
