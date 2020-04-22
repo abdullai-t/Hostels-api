@@ -130,6 +130,7 @@ def get_hostels_in_location(request,location):
         return Response(serializer.data)
 
 
+
 # get all rooms in a specific hostel
 @api_view(['GET',])
 def get_rooms_in_hostel(request,hostel):
@@ -153,6 +154,10 @@ def get_user_booked_rooms(request):
     booked_rooms = BookRoom.objects.filter(user__username=user)
     serializer = bookRoomSerializer(booked_rooms, many=True)
     return Response(serializer.data)
+
+        
+    
+    
 
 # view for budget page
 class budget_api_listView(ListAPIView):
