@@ -7,18 +7,20 @@ class locationSerializer(serializers.ModelSerializer):
         fields =['name', 'description', 'image']
         
 class hostelSerializer(serializers.ModelSerializer):
+    location = locationSerializer()
     class Meta:
         model = Hostel
-        fields = ['name', 'description', 'image']
+        fields = ['name', 'description', 'image', 'location']
         
 class roomSerializer(serializers.ModelSerializer):
+    hostel = hostelSerializer()
     class Meta:
         model = Room
-        fields = ['room_type', 'price']
+        fields = ['room_type', 'price', 'hostel']
         
         
 class bookRoomSerializer(serializers.ModelSerializer):
-    room = serializers.CharField(source='room.room_type', read_only=True)
+    room = roomSerializer()
     class Meta:
         model = BookRoom
         fields = ['room']

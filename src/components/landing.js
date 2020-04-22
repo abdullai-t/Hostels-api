@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import one from './img/1.jpg';
-import two from './img/2.jpg';
-import three from './img/3.jpg';
+// import one from './img/1.jpg';
+// import two from './img/2.jpg';
+// import three from './img/3.jpg';
 
 export default class Landing extends Component {
     render() {
@@ -22,7 +22,7 @@ export default class Landing extends Component {
 
                 {/* photo gallery */}
 
-                <div className="conatiner photo-g">
+                {/* <div className="conatiner photo-g">
                     <h2 class="ui header">Photo Gallery </h2>
                     <div class="ui link cards three column doubling grid container">
                         <div class="card">
@@ -130,7 +130,7 @@ export default class Landing extends Component {
 
                 {/* footer */}
 
-                <footer>
+                {/* <footer>
                     <div className="folow-us">
                     <i class="facebook f icon"></i>
                     <i class="twitter  icon"></i>
@@ -138,7 +138,7 @@ export default class Landing extends Component {
                     <div>
                         Copyright © Hostels 2020
                     </div>
-                </footer>
+                </footer>  */}
 
             </div>
 

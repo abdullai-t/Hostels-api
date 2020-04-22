@@ -43,25 +43,25 @@ def registration_view(request):
             data = serializer.errors
         return Response(data)
     
-
+    
+# ##################################### login view####################################
 @api_view(["POST"])
-def login(request):
+def login_view(request):
     username  = request.data.get("username")
     password  = request.data.get("password")
     if username is None or password is None:
         return Response({'error': 'Please provide both username and password'},status=HTTP_400_BAD_REQUEST)
         
-    user = authenticate(username=username, password=password)
-    # login(, user)
+    user = authenticate(request,username=username, password=password)
+    login(request, user)
 
     if not user:
-        return Response({'error': 'Invalid Credentials'}, status=HTTP_404_NOT_FOUND)
-    # login(request, user)   
+        return Response({'error': 'Invalid Credentials'}, status=HTTP_404_NOT_FOUND) 
     token, _ = Token.objects.get_or_create(user=user)
     return Response({'token': token.key},status=HTTP_200_OK)
+     
 
-
-    # password reset view
+    # #####################password reset view############################################
 @api_view(['POST',])   
 def PasswordRestView(request): 
     # checking the validity of the email entered by the user 
@@ -166,6 +166,8 @@ def passwordChangeView(request):
     else:
         data = serializer.error
     return Response(data)
+
+
 
 
 # user profile view

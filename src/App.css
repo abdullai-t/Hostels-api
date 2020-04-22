@@ -17,7 +17,7 @@ form{
 /* landing page */
 .top-item{
   background-image: url('./components/img/b.jpg');
-  height: 55vh;
+  height: 100vh;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -44,7 +44,7 @@ form{
   top:2% !important;
   right: 2% !important;
 }
-.photo-g{
+/* .photo-g{
   margin-top: 4%;
 }
 .header{
@@ -71,4 +71,4 @@ footer {
 }
 .folow-us{
 margin-bottom: 2%;
- }
+ } */

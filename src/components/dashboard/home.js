@@ -15,7 +15,7 @@ export default class Home extends Component {
 
     componentDidMount() {
         // const { token } = this.props.location
-        axios.get(`http://127.0.0.1:8000/api-hostels/Bomsu/hostels/`
+        axios.get(`http://127.0.0.1:8000/api-hostels/locations/`
             // headers: {
             //     Authorization: 'Token ' + token //the token is a variable which holds the token
             //   }
