@@ -5,16 +5,20 @@ import Register from './components/auth/register'
 import Landing from './components/landing'
 import Login from './components/auth/login'
 import Home from './components/dashboard/home'
+import PasswordResetConfirm from './components/auth/passwordResetConfirm'
+import {ProtectedRoutes} from './components/protectedRoutes'
 
 class App extends React.Component {
   render() {
     return (
       <Router>
         <Switch>
-        <Route path="/login" component= {Login}/>
-        <Route path="/register" component= {Register}/>
-        <Route path="/home" component= {Home}/>
-        <Route path="/" component= {Landing}/>
+        <Route path="/api-auth/reset/:uid/:token" component={PasswordResetConfirm} />
+        <Route exact path="/login" component= {Login}/>
+        <Route exact path="/register" component= {Register}/>
+        <ProtectedRoutes exact path="/home" component= {Home}/>
+        <Route exact path="/" component= {Landing}/>
+        <Route path="*" component = {()=>"404 Page not found"} />
         </Switch>
       </Router>
     )
@@ -22,13 +26,4 @@ class App extends React.Component {
 }
 export default App
 
-    // $.ajax({
-    //   type: "GET",
-    //   url: "/hostel/search",
-    //   data: {
-    //     search: $("#search").val()
-    //   },
-    //   error: function(jqXHR, textStatus, error) {
-    //     console.log(error);
-    //   }
-    // });
+  

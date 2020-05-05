@@ -39,7 +39,8 @@ export default class register extends Component {
 
     render() {
         return (
-            <div className="register-main">
+            
+            <div className="ui text container register-main">
                 <div className="ui segment">
                     <form className="ui form" onSubmit={this.handleSubmit}>
                         <div className="register-title">

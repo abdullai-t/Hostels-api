@@ -129,8 +129,6 @@ def get_hostels_in_location(request,location):
         serializer = hostelSerializer(hostels, many=True)
         return Response(serializer.data)
 
-
-
 # get all rooms in a specific hostel
 @api_view(['GET',])
 def get_rooms_in_hostel(request,hostel):

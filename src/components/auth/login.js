@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import '../../App.css'
 import { Link } from 'react-router-dom'
+import PasswordResetModal from './passwordReset'
 
 export default class Login extends Component {
     constructor(props) {
@@ -24,26 +25,29 @@ export default class Login extends Component {
         })
             .then(res => {
                 this.setState({ token: res.data.token })
-                console.log(this.state.token)
                 if (res.data.token) {
                     this.props.history.push({
                         pathname: '/home',
-                        token:this.state.token
+                        token: this.state.token
                     })
+                    localStorage.setItem('token', this.state.token);
+                    // window.sessionStorage.setItem('token', this.state.token);
                 }
             })
         event.preventDefault();
 
     }
 
+
     render() {
         return (
-            <div className="register-main">
+
+            <div className="ui text center container register-main">
                 <div className="ui segment">
                     <form className="ui form" onSubmit={this.handleSubmit}>
                         <div className="register-title">
                             Log in
-                </div>
+                     </div>
 
                         <div className="required field">
                             <label>Username</label>
@@ -56,8 +60,9 @@ export default class Login extends Component {
                         </div>
                         <button type="submit" className="ui button">log in</button>
                         <Link to="/register" className="ui button"> register</Link>
+
                         <div className="forgot">
-                            <a href="http://127.0.0.1:8000/api-auth/password/reset/">forgot password ?</a>
+                          <PasswordResetModal />
                         </div>
 
                     </form>

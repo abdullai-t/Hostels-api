@@ -1,5 +1,5 @@
 form{
-  padding: 5% 15% 5% 15%;
+  padding: 5% 10% 5% 10%;
 }
 .register-title{
   text-align: center;
@@ -8,7 +8,8 @@ form{
 }
 
 .register-main{
-  padding:5% 20% 5% 20%;
+  padding-top: 10%;
+  padding-bottom: 5%;
 }
 .forgot{
   margin-top: 2rem;
@@ -37,6 +38,7 @@ form{
 }
 .discip p{
   font-size: 2rem;
+  text-align: center;
   color: blanchedalmond;
 }
 .landing-login{
@@ -44,31 +46,3 @@ form{
   top:2% !important;
   right: 2% !important;
 }
-/* .photo-g{
-  margin-top: 4%;
-}
-.header{
-  text-align: center;
-  font-size: 2rem !important;
-  margin-bottom: 4% !important;
-  font-family: montserat;
-}
-
-footer {
-  margin-top: 20px;
-  background-color: rgba(0, 0, 0, 0.1);
-  padding-top: 2rem !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding-bottom: 1.4rem !important;
-}
-
-.folow-us i{
- color: #f1948a ;
- font-size: 2rem;
-}
-.folow-us{
-margin-bottom: 2%;
- } */

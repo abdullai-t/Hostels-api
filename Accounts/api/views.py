@@ -89,7 +89,7 @@ def PasswordRestView(request):
             token = Token.objects.get(user=user)
             # email template('email/email_body.html') with parameters of user, uid, token .........
             msg_html = render_to_string('email/email_body.html', 
-                                        {'user': user, 'domain': "http://127.0.0.1:8000", 
+                                        {'user': user, 'domain': "http://localhost:3000", 
                                          'site_name':'Hostels' ,'uid':uid, 'token':token})
             
             # send email function
@@ -101,8 +101,9 @@ def PasswordRestView(request):
                 html_message=msg_html,
             )
             # if email sending is successful, return success message and token
-            data["success"]= "A reset link has been sent to your email. visit to reset your password"
+            data["success"]= "A reset link has been sent to " + user.email + ". Open your email to reset your password"
             data['token']= token.key
+            data['uid'] = uid
         else:
             data["failure"] = "user can not be found"
     return Response(data)
@@ -119,7 +120,8 @@ def passwordResetConfirmView(request, uidb64, token):
         # checking if there is a user with that pk
         user = User.objects.get(pk=uid)
         # get the token of that user
-        check_token = Token.objects.get(user=user)
+        check_token = Token.objects.get(key=token)
+        print(check_token)
         data = {}
         # if the user exist and the token is the same as the one in parsed into the url, 
         if user and check_token:
@@ -140,6 +142,7 @@ def passwordResetConfirmView(request, uidb64, token):
                 # return the token and the success message when everything is successful
                 data["success"] = "your password has been successfully reset"
                 data['token']= token.key
+                
             else:
                 data = serializer.error
         return Response(data)
