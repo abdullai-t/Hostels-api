@@ -1,9 +1,4 @@
 import React, { Component } from 'react'
-// styles import 
-import '../styles/dashboard.css'
-
-
-
 
 export default class Home extends Component {
     constructor(props) {

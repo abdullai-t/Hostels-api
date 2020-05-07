@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Register from './components/auth/register'
 import Landing from './components/landing'
 import Login from './components/auth/login'
-import Home from './components/dashboard/home'
+import Home from './components/dashboard'
 import PasswordResetConfirm from './components/auth/passwordResetConfirm'
 import {ProtectedRoutes} from './components/protectedRoutes'
 

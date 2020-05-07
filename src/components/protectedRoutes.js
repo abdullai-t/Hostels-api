@@ -2,7 +2,6 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import auth from './auth/auth'
 
-const isAuth = localStorage.getItem('token')
 export const ProtectedRoutes =({component:Component, ...rest})=>{
     return(
         <Route {...rest} render={
