@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import {Grid} from '@material-ui/core'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
+
+
 
 
   
-export default class Home extends Component {
+export default class BookRoom extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -21,6 +24,7 @@ export default class Home extends Component {
             this.setState({data:res.data})
         })
         .catch(err=>{console.log(err)})
+       
     }
     render() { 
         const {data} = this.state
@@ -31,10 +35,10 @@ export default class Home extends Component {
                     <Grid item xs={12} md={4}>
                     <div class="ui card" style={{margin:"2%"}}>
                     <div class="image">
-                        <img src={loc.image}  style={{height:164}}/>
+                        <img src={loc.image}  style={{height:164}} alt=""/>
                     </div>
                     <div class="extra content">
-                        <a> {loc.name} </a>
+                    <Link to={`/book/${loc.name}`}>{loc.name}</Link>
                     </div>
                     </div>
                 </Grid>

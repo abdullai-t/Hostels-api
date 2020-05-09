@@ -4,9 +4,14 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Register from './components/auth/register'
 import Landing from './components/landing'
 import Login from './components/auth/login'
-import Home from './components/dashboard'
+import Home from './components/dashboard/home'
+
+
 import PasswordResetConfirm from './components/auth/passwordResetConfirm'
-import {ProtectedRoutes} from './components/protectedRoutes'
+import {DashboardLayoutRoute} from './components/dashboard/dashboardLayout'
+import BookRoom from './components/dashboard/book room'
+import LocationDetails from './components/dashboard/book room/locationDetails'
+import HostelDetails from './components/dashboard/book room/hostelDetails'
 
 class App extends React.Component {
   render() {
@@ -16,7 +21,12 @@ class App extends React.Component {
         <Route path="/api-auth/reset/:uid/:token" component={PasswordResetConfirm} />
         <Route exact path="/login" component= {Login}/>
         <Route exact path="/register" component= {Register}/>
-        <ProtectedRoutes exact path="/home" component= {Home}/>
+
+        <DashboardLayoutRoute exact path="/home" component= {Home}/>
+        <DashboardLayoutRoute exact path="/book/:location/:hostel" component= {HostelDetails}/>
+        <DashboardLayoutRoute exact path="/book/:location" component={LocationDetails} />
+        <DashboardLayoutRoute exact path="/book" component={BookRoom} />
+
         <Route exact path="/" component= {Landing}/>
         <Route path="*" component = {()=>"404 Page not found"} />
         </Switch>

@@ -7,8 +7,6 @@ import {
     ListItemText, 
 } from '@material-ui/core'
 
-import {Card, CardMedia,CardActions, Grid} from '@material-ui/core'
-import img from '../img/b.jpg'
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -62,8 +60,9 @@ const useStyles = makeStyles((theme) => ({
       }
 }));
 
-function Home(props) {
-    const { window } = props;
+function SideNav({component:Component, ...rest}) {
+    const { window } = {...rest};
+    // console.log(...rest)
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -156,26 +155,7 @@ function Home(props) {
 
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-
-                
-                <div className={classes.all}>
-                        <Grid container >
-                            <Grid item xs={12} md={4}>
-                                <Card className={classes.cardItem}>
-                                <CardMedia
-                                    className={classes.media}
-                                    image={img}
-                                    title="Paella dish"
-                                />
-                                <CardActions disableSpacing>
-                                    <IconButton aria-label="add to favorites">
-                                    Ayeduase
-                                    </IconButton>
-                                </CardActions>
-                                </Card>
-                            </Grid>
-                        </Grid>
-                </div>
+                     <Component {...rest}/>
             </main>
 
         </div>
@@ -183,4 +163,4 @@ function Home(props) {
 }
 
 
-export default Home;
+export default SideNav;

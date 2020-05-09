@@ -5,3 +5,5 @@ creating home view
 inside dashboard create a file called index
 copy the side nave code there and create a Switch from router then based on the route  or linke the 
 page render base on that.
+
+add a query for a particular location

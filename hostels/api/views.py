@@ -138,7 +138,6 @@ def get_rooms_in_hostel(request,hostel):
           return Response(status= status.HTTP_404_NOT_FOUND)
         data = {}
         serializer = roomSerializer(rooms, many=True)
-        data['hostel'] = hostel
         data['room'] = serializer.data
         return Response(data)
 
