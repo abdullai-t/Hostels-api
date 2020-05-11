@@ -11,7 +11,6 @@ class Location(models.Model):
     
     def __str__(self):
          return self.name
-    
     def natural_key(self):
         return (self.name)
 
@@ -25,6 +24,7 @@ class Hostel(models.Model):
     location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     description = models.TextField()
+    contact = models.CharField(max_length=10,blank=True, null=True)
     image = models.ImageField(upload_to='hostel') 
     
     def __str__(self):

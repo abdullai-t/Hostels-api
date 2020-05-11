@@ -69,9 +69,8 @@ def room_creation_view(request):
 def book_room_view(request):
     if request.method == "POST":
         user = User.objects.get(username=request.user)
-        hostel = Hostel.objects.get(name=request.data.get("hostel"))
         room_type = request.data.get("room")
-        room = Room.objects.get(room_type=room_type, hostel__pk=hostel.pk)
+        room = Room.objects.get(pk=room_type)
         data={}
         serializer = bookRoomSerializer(data=request.data)
         if serializer.is_valid():
