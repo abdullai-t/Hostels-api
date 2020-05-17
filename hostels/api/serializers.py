@@ -10,7 +10,7 @@ class hostelSerializer(serializers.ModelSerializer):
     location = locationSerializer(read_only=True)
     class Meta:
         model = Hostel
-        fields = ['name', 'description', 'image', 'location']
+        fields = ['name', 'description', 'contact','image', 'location']
         
 class roomSerializer(serializers.ModelSerializer):
     hostel = hostelSerializer(read_only=True)
