@@ -11,8 +11,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import SettingsIcon from '@material-ui/icons/SettingsRounded'
 import AddIcon from '@material-ui/icons/Add';
-import EditIcon from '@material-ui/icons/EditRounded'
+// import EditIcon from '@material-ui/icons/EditRounded'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import TableChartIcon from '@material-ui/icons/TableChart';
 // import { Link } from 'react-router-dom'
 
 import index from '../../static images/index.jpeg'
@@ -132,9 +133,9 @@ function ResponsiveDrawer({ component: Component, ...rest }) {
 
         <ListItem button className={classes.listItem}>
           <ListItemIcon>
-            <EditIcon />
+            <TableChartIcon />
           </ListItemIcon>
-          <ListItemText primary="Edit" />
+          <ListItemText primary="Tables" />
         </ListItem>
 
         <ListItem button className={classes.listItem}>
@@ -239,7 +240,7 @@ function ResponsiveDrawer({ component: Component, ...rest }) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
 
-        <Component  props/>
+        <Component {...rest} props/>
       </main>
     </div>
   );

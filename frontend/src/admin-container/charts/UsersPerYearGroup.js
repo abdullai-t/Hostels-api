@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import {Pie} from 'react-chartjs-2';
-import axios from 'axios'
+import axios from 'axios';
 
 
-export default class HostelsPerLocation extends Component {
-    constructor(props) {
+
+export default class UsersPerYearGroup extends Component {
+	constructor(props) {
         super(props)
     
         this.state = {
@@ -17,9 +18,8 @@ export default class HostelsPerLocation extends Component {
             .then(res=>{this.setState({data:res.data, isLoading:false})})
             .catch(err=>{console.log(err)})
     }
-    
     render() {
-        const {roomsChart} = this.state.data
+        const {userChart} = this.state.data
       
         return (
             <div>
@@ -27,13 +27,13 @@ export default class HostelsPerLocation extends Component {
                 <div>
                 <Pie data={{
                     labels: [
-                        '1 in 1',
-                        '2 in 1',
-                        '3 in 1',
-                        '4 in 1'
+                        '1st year',
+                        '2nd year',
+                        '3rd year',
+                        '4th year'
                     ],
                     datasets: [{
-                        data: [roomsChart.one,roomsChart.two,roomsChart.three,roomsChart.four],
+                        data: [userChart.one,userChart.two,userChart.three,userChart.four],
                         backgroundColor: [
                         '#FF6384',
                         '#36A2EB',
@@ -48,7 +48,7 @@ export default class HostelsPerLocation extends Component {
                         ]
                     }]
                 }}/>     
-                 <h3  style={{textAlign:'center'}}>Distribution By Room Type</h3> 
+                 <h3  style={{textAlign:'center'}}>Distribution Users by year Group</h3> 
                  </div>    
                  ):(
                 <p></p>

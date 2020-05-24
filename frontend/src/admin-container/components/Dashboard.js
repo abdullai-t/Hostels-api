@@ -3,9 +3,10 @@ import { Icon,Segment, Loader, Table, Dimmer} from 'semantic-ui-react'
 import axios from 'axios'
 
 import Grid from '@material-ui/core/Grid';
-import HostelsPerLocation from '../charts/HostelsPerLocation';
+import UsersPerYearGroup from '../charts/UsersPerYearGroup';
 import UserPerHostel from '../charts/UserPerHostel'
 import RoomTypeChart from '../charts/RoomTypeChart'
+import HostelsPerLocation from '../charts/HostelsPerLocation'
 
 
 const styles = {
@@ -126,14 +127,14 @@ export default class Dashboard extends Component {
                  <Grid container style={styles.spacing}>
                     
                     <Grid item xs={12} md={6} sm={12} >
-                    <Segment raised >
+                    <Segment raised  style={{marginRight:'1%'}}>
                         <UserPerHostel />
                     </Segment>
                     </Grid>
 
                     <Grid item xs={12} md={6} sm={12}>
-                    <Segment raised  style={{marginLeft:'3%'}}>
-                        <UserPerHostel />
+                    <Segment raised  style={{marginLeft:'1%'}}>
+                        <HostelsPerLocation />
                     </Segment>
                     </Grid>
                     </Grid>
@@ -142,14 +143,14 @@ export default class Dashboard extends Component {
                 <Grid container style={styles.spacing}>
                                       
                     <Grid item xs={12} md={6} sm={12}>
-                        <Segment raised>  
+                        <Segment raised style={{marginRight:'1%'}}>  
                            <RoomTypeChart rooms={roomsChart} />
                         </Segment>
                     </Grid>
 
                     <Grid item xs={12} md={6} sm={12} >
-                        <Segment raised  style={{marginLeft:'3%'}}>
-                        <HostelsPerLocation />
+                        <Segment raised  style={{marginLeft:'1%'}}>
+                        <UsersPerYearGroup />
                         </Segment>
                     </Grid>
 

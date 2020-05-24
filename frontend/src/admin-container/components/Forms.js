@@ -65,8 +65,8 @@ export default class create extends Component {
             password2: password2
         })
             .then((res) => {
-                if (res.data.token) {
-                   return  () => this.setState({ userOpen: false })
+                if (res.data) {
+                    return () => this.setState({ userOpen: false })
                 }
             }
 
@@ -87,7 +87,7 @@ export default class create extends Component {
         )
         .then(res=>{
             if (res.data) {
-                console.log("sucessful")
+                return () => this.setState({ locationOpen: false })
             }
         })
         .catch(err=>{console.log(err)})
@@ -108,7 +108,7 @@ export default class create extends Component {
         )
         .then(res=>{
             if (res.data) {
-                console.log("sucessful")
+                return () => this.setState({ hostelOpen: false })
             }
         })
         .catch(err=>{console.log(err)})
@@ -127,7 +127,7 @@ export default class create extends Component {
         )
         .then(res=>{
             if (res.data) {
-                console.log("sucessful")
+                return () => this.setState({ roomOpen: false })
             }
         })
         .catch(err=>{console.log(err)})

@@ -45,6 +45,7 @@ class user_creation_serializer(serializers.ModelSerializer):
             name= self.validated_data['username'],
             email= self.validated_data['email'],
             contact= self.validated_data['contact'],
+            year= self.validated_data['year'],
             user = account
         )
         profile.save()

@@ -1,51 +1,90 @@
 import React, { Component } from 'react'
-import {Pie} from 'react-chartjs-2';
-
-const data = {
-	labels: [
-		'Year 1',
-		'year 2',
-        'year 3',
-        'year 4'
-	],
-	datasets: [{
-		data: [300, 50, 100, 90],
-		backgroundColor: [
-		'#FF6384',
-		'#36A2EB',
-        '#FFCE56',
-        '#36A2EB',
-		],
-		hoverBackgroundColor: [
-		'#FF6384',
-		'#36A2EB',
-        '#FFCE56',
-        '#36A2EB',
-		]
-	}]
-};
+import {Bar} from 'react-chartjs-2';
+import Axios from 'axios';
 
 
 export default class HostelsPerLocation extends Component {
+
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       hostels:[], isLoading:true,
+       data:{
+        labels: [],
+        datasets: [
+          {
+            label: 'Hostels In various Location',
+            backgroundColor: '#FF6384',
+            borderColor: 'rgba(255,99,132,1)',
+            borderWidth: 1,
+            hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+            hoverBorderColor: 'rgba(255,99,132,1)',
+            data: []
+          }
+        ]
+      }
+
+    }
+  }
+  
+  componentDidMount() {
+    let labels=[]
+    let data=[]
+
+    Axios.get(`http://127.0.0.1:8000/api-admin/hostel-location/`)
+        .then(res=>{
+          this.setState({hostels:res.data.hostels, isLoading:false})
+          this.state.hostels.map(hostel=>{
+            labels.push(hostel.location__name)
+            data.push(hostel.location__count)
+          })
+
+          var newData = {...this.state.data}
+          newData.labels = labels;
+          newData.datasets[0].data = data
+
+          this.setState({data:newData})
+        })
+        .catch()
+  }
     render() {
         return (
             <div>
-             <Pie data={data} />     
-             <h3  style={{textAlign:'center'}}>Distribution By year Group</h3>         
+              {!this.state.isLoading ?
+              (
+                <Bar
+                    data={this.state.data}
+                    width='80%'
+                    height='90%'
+                    />
+              )
+            :
+            (
+              <p></p>
+            )}
             </div>
         )
     }
 }
 
 
-// export default class PieCart extends React.createClass{
+// export default React.createClass({
+//   displayName: 'BarExample',
 
 //   render() {
 //     return (
 //       <div>
-//         <h2>Pie Example</h2>
-//         <Pie data={data} />
+//         <h2>Bar Example (custom size)</h2>
+//         <Bar
+//           data={data}
+//           width={100}
+//           height={50}
+//           options={{
+//             maintainAspectRatio: false
+//           }}
+//         />
 //       </div>
 //     );
 //   }
-// }
+// });
