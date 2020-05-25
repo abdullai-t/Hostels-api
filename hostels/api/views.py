@@ -9,10 +9,13 @@ from rest_framework.generics import ListAPIView
 from rest_framework.filters import SearchFilter, OrderingFilter
 
 from hostels.api.serializers import locationSerializer,hostelSerializer, roomSerializer,bookRoomSerializer
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.decorators import parser_classes
 
 # ######################### create Location requests ########################################################
 # view for creating locations
 @api_view(['POST',])
+@parser_classes([MultiPartParser,FormParser])
 def location_creation_view(request):
     if request.method == "POST":
         serializer = locationSerializer(data = request.data)
@@ -29,7 +32,6 @@ def location_creation_view(request):
 def hostel_creation_view(request):
     if request.method == "POST":
         location = Location.objects.get(name=request.data.get("location"))
-        print(location)
         serializer = hostelSerializer(data = request.data)
         data={}
         if serializer.is_valid():

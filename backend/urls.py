@@ -25,6 +25,7 @@ urlpatterns = [
       #   rest framework urls
     url(r'^api-auth/', include('Accounts.api.urls')),
     url(r'^api-hostels/', include('hostels.api.urls')),
+    url(r'^api-admin/', include('myAdmin.api.urls')),
 
    
 ]

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from hostels.models import *
+from django.contrib.auth.models import User
 
 class locationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,10 +18,17 @@ class roomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         fields = ['id','room_type', 'price', 'hostel']
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'id')
+        read_only_fields = ('account_name',)
         
         
 class bookRoomSerializer(serializers.ModelSerializer):
     room = roomSerializer(read_only=True)
+    user = UserSerializer(read_only=True)
     class Meta:
         model = BookRoom
-        fields = ['room']
+        fields = ['room', 'user']
