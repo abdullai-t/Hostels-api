@@ -204,19 +204,6 @@ export default class Dashboard extends Component {
               
                 )
             }
-
-
-
-
-                {/* Users per location  barchart*/}
-
-
-                {/* users per year group pie chart */}
-
-                
-                {/* users per hostel barchar */}
-                 
-
                 
             </div>
         )

@@ -37,16 +37,16 @@ export default class create extends Component {
 
 
     handleChange = (selected, data)=>{
-        if (data.value == "1") {
+        if (data.value === 1) {
             this.setState({userOpen:true, locationOpen:false, roomOpen:false, hostelOpen:false})
         }
-        else if (data.value == "2") {
+        else if (data.value === 2) {
             this.setState({userOpen:false, locationOpen:true, roomOpen:false, hostelOpen:false})
         }
-        else if (data.value == "3") {
+        else if (data.value === 3) {
             this.setState({userOpen:false, locationOpen:false, roomOpen:false, hostelOpen:true})
         }
-        else if (data.value == "4") {
+        else if (data.value === 4) {
             this.setState({userOpen:false, locationOpen:false, roomOpen:true, hostelOpen:false})
         }
     }

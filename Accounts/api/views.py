@@ -180,21 +180,15 @@ def passwordChangeView(request):
 def user_profile_view(request):
     if request.method =='GET':
         user = user_profile.objects.get(user=request.user)
-        user_info = {
-            'name':user.name,
-            'email':user.email,
-            'avatar':user.avatar,
-            'contact':user.contact,
-        }
         
         data={}
         if user:        
-            serializer = user_profile_serializer(data=user_info)
-            if serializer.is_valid():   
-               return Response(serializer.data)
-            else:
-               data["error"] = "the data is invalid"
-               return Response(data)
+            serializer = user_profile_serializer(user)
+            data['user_info']= serializer.data
+            return Response(data)
+        else:
+            data["error"] = "the data is invalid"
+            return Response(data)
     else:
         user = user_profile.objects.get(user=request.user)
         serializer = user_profile_serializer(data=request.data, instance=user)

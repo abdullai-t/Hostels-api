@@ -1,4 +1,5 @@
 import React from "react";
+import auth from '../../auth'
 
 import {AppBar,CssBaseline, Divider,Drawer, Hidden,IconButton,
         List, Toolbar, Typography, makeStyles, useTheme, ListItem,
@@ -11,13 +12,12 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import SettingsIcon from '@material-ui/icons/SettingsRounded'
 import AddIcon from '@material-ui/icons/Add';
-// import EditIcon from '@material-ui/icons/EditRounded'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import TableChartIcon from '@material-ui/icons/TableChart';
-// import { Link } from 'react-router-dom'
+
 
 import index from '../../static images/index.jpeg'
 import Forms from '../components/Forms'
+import Settings from '../components/Settings'
 
 const drawerWidth = 220;
 
@@ -97,6 +97,7 @@ function ResponsiveDrawer({ component: Component, ...rest }) {
 
   const [, setAnchorEl] = React.useState(null);
   const [, setMobileMoreAnchorEl] = React.useState(null);
+  const [settingsOpen, setSettingsOpen] = React.useState(false)
 
 
   const handleProfileMenuOpen = (event) => {
@@ -124,28 +125,26 @@ function ResponsiveDrawer({ component: Component, ...rest }) {
           <ListItemText primary="Dashboard" />
         </ListItem>
         <ListItem button className={classes.listItem}>
-        
           <ListItemIcon>
             <AddIcon />
           </ListItemIcon>
           <Forms />
         </ListItem>
 
-        <ListItem button className={classes.listItem}>
-          <ListItemIcon>
-            <TableChartIcon />
-          </ListItemIcon>
-          <ListItemText primary="Tables" />
-        </ListItem>
-
-        <ListItem button className={classes.listItem}>
+        <ListItem button className={classes.listItem} onClick={()=>{setSettingsOpen(true)}}>
           <ListItemIcon>
             <SettingsIcon />
           </ListItemIcon>
           <ListItemText primary="Settings" />
+          {settingsOpen ? (<Settings open={settingsOpen} />): <p></p>}
         </ListItem>
 
-        <ListItem button  className={classes.listItem}>
+        <ListItem button 
+         className={classes.listItem}
+         onClick={()=>{auth.logout(()=>{
+           rest.history.push('/admin/login')
+         })}}
+          >
           <ListItemIcon>
             <ExitToAppIcon />
           </ListItemIcon>

@@ -1,17 +1,27 @@
 import React from 'react'
 import SideNav from './SideNav'
 import {Route, Redirect} from 'react-router-dom'
+import auth from '../../auth'
+
 
 const AdminLayoutRoute = ({ component: Component, ...rest }) => {
     return (
       <Route
         {...rest}
         render={props => {
-          if (2>3) {
-            return <Redirect to="/login" />;
+          if (auth.isAuthenticated) {
+            return(
+              <SideNav component={Component} {...rest} {...props} />
+            )
+            
           }
           return(
-              <SideNav component={Component} {...rest} {...props} />
+            <Redirect to={
+              {
+                  pathname:'/admin/login',
+                  state:props.location
+              }
+          } />
           )
         }}
       />
